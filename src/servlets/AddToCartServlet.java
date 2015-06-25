@@ -36,7 +36,7 @@ public class AddToCartServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		String goodsId = request.getParameter("goodsId");
 		HttpSession session = request.getSession();
-		ArrayList cart = (ArrayList)session.getAttribute("session");
+		ArrayList cart = (ArrayList)session.getAttribute("cart");
 		CartManager cartM = new CartManager();
 		if(cart!=null){
 			cartM.setItems(cart);

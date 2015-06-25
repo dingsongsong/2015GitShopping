@@ -48,7 +48,7 @@ public class GoodsDao {
 		ResultSet rs = null;
 		int count =-1;
 		try {
-			rs.next();
+			
 			rs = db.executeQuery("select count(*) from goods", null);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -56,6 +56,7 @@ public class GoodsDao {
 		}
 		if(rs!=null){
 			try {
+				rs.next();
 				count = rs.getInt(1);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -70,9 +71,9 @@ public class GoodsDao {
 		Connection conn = db.getConnection();
 		ResultSet rs = null;
 		GoodsVo goodsVo = new GoodsVo();
-		try {
-			rs.next();	
+		try {	
 			rs = db.executeQuery("select * from goods where goodsid ='"+id+"'",null);
+			rs.next();
 			goodsVo.setGoodsId(rs.getString("goodsid"));
 			goodsVo.setGoodsName(rs.getString("goodsname"));
 			goodsVo.setPrice(rs.getFloat("price"));

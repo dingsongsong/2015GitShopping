@@ -12,7 +12,8 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'index.jsp' starting page</title>
+<title>My JSP 'cart.jsp' starting page</title>
+
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -21,30 +22,37 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+
 </head>
 
 <body>
-	<a href="GetGoodsServlet?pageNo=1">第一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
-	<c:if test="${pageNo>1}"><a href="GetGoodsServlet?pageNo=${pageNo-1}">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-	<c:if test="${pageNo<pageCount}"><a href="GetGoodsServlet?pageNo=${pageNo+1}">下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
-	<a href="GetGoodsServlet?pageNo=${pageCount}">最后一页</a>
+
 	<table border="1px">
 		<thead>
 			<tr>
-				<th>商品编号</th><th>商品名称</th><th>商品价格</th><th></th>
+				<th>商品编号</th>
+				<th>商品名称</th>
+				<th>商品价格</th>
+				<th>商品数量</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${goodsList}" var="goods">
-			<tr>
-				<td>${goods.goodsId}</td>
-				<td>${goods.goodsName}</td>
-				<td>${goods.price}</td>
-				<td><a href="AddToCartServlet?goodsId=${goods.goodsId}">将商品添加到数据库当中</a></td>
-			</tr>
-			
+			<c:forEach items="${sessionScope.cart}" var="item">
+				<tr>
+					<form name="cartManager" method="post">
+						<input type="hidden" value="${item.goods.goodsId}" name="goodsId">
+						<td>${item.goods.goodsId}</td>
+						<td>${item.goods.goodsName}</td>
+						<td>${item.goods.price}</td>
+						<td><input type="text" value="${item.count}" /></td>
+						<td><input type="submit" value="修改" name="operate"> <input
+							type="submit" value="删除" name="operate"></td>
+					</form>
+				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+
 </body>
 </html>
