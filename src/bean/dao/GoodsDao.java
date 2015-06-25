@@ -62,7 +62,7 @@ public class GoodsDao {
 				e.printStackTrace();
 			}
 		}
-		return count;
+		return count%2==0?count/2:count/2+1;
 		
 	}
 	public GoodsVo getGoodsVoById(String id) {
