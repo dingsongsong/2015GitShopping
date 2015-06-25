@@ -42,4 +42,44 @@ public class GoodsDao {
 		}
 		return goodsList;
 	}
+	public int getCount(){
+		DBBean db = new DBBean();
+		Connection conn = db.getConnection();
+		ResultSet rs = null;
+		int count =-1;
+		try {
+			rs.next();
+			rs = db.executeQuery("select count(*) from goods", null);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(rs!=null){
+			try {
+				count = rs.getInt(1);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return count;
+		
+	}
+	public GoodsVo getGoodsVoById(String id) {
+		DBBean db = new DBBean();
+		Connection conn = db.getConnection();
+		ResultSet rs = null;
+		GoodsVo goodsVo = new GoodsVo();
+		try {
+			rs.next();	
+			rs = db.executeQuery("select * from goods where goodsid ='"+id+"'",null);
+			goodsVo.setGoodsId(rs.getString("goodsid"));
+			goodsVo.setGoodsName(rs.getString("goodsname"));
+			goodsVo.setPrice(rs.getFloat("price"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return goodsVo;
+	}
 }

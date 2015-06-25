@@ -24,7 +24,8 @@
 </head>
 
 <body>
-	<c:if test=""></c:if>
+	<a href="GetGoodsServlet?pageNo=1">第一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	<c:if test="${pageNo!=1}"><a href="GetGoodsServlet?pageNo=${pageNo-1}">上一页</a></c:if>
 	<table border="1px">
 		<thead>
 			<tr>

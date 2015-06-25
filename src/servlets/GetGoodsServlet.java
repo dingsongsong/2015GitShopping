@@ -40,6 +40,7 @@ public class GetGoodsServlet extends HttpServlet {
 		}
 		GoodsDao dao = new GoodsDao();
 		ArrayList goodsList = dao.getGoodsByPage(iPageNo);
+		request.setAttribute("pageNo", iPageNo);
 		request.setAttribute("goodsList", goodsList);
 		request.getRequestDispatcher("goodsList.jsp")
 				.forward(request, response);
